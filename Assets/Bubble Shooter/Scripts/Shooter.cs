@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    [SerializeField] GameObject[] bulletTypes;
     [SerializeField] float maxAngle;
     [SerializeField] float space;
 
@@ -28,6 +29,15 @@ public class Shooter : MonoBehaviour
             }
             lastMouseCoordinate = Input.mousePosition;
             Vector2 touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (aimLineList.Count != 0)
+            {
+                GameObject bullet = Instantiate(bulletTypes[0], transform.position, transform.rotation);
+                bullet.GetComponent<BubbleBullet>().MoveRayList = new Stack<Ray2D>(aimLineList);
+            }
         }
     }
 

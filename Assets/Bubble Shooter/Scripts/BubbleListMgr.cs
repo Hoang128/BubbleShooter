@@ -64,6 +64,7 @@ public class BubbleListMgr : MonoBehaviour
 
     public void AddBubbleToList(Vector2Int coor, GameObject obj)
     {
+        Destroy(obj);
         if (coor.y > (range.y - 1))
         {
             List<GameObject> bubbleRow = new List<GameObject>();
@@ -74,16 +75,17 @@ public class BubbleListMgr : MonoBehaviour
             range.y++;
             bubbleList.Insert(bubbleList.Count, bubbleRow);
         }
-        bubbleList[coor.y][coor.x] = obj;
-        obj.GetComponent<Bubble>().BubbleListMgr = gameObject;
-        obj.GetComponent<Bubble>().Coor = coor;
         Vector2 movePos = new Vector2();
         if (coor.y % 2 == 0)
             movePos.x = startPos.x + coor.x * bubbleSpace.x;
         else
-            movePos.x = startPos.x + coor.x * bubbleSpace.x + bubbleSpace.x/2;
+            movePos.x = startPos.x + coor.x * bubbleSpace.x + bubbleSpace.x / 2;
         movePos.y = startPos.y - coor.y * bubbleSpace.y;
-        obj.transform.position = movePos;
+        
+        GameObject newBubble = Instantiate(bubbleTypeList[0], movePos, transform.rotation);
+        bubbleList[coor.y][coor.x] = newBubble;
+        newBubble.GetComponent<Bubble>().BubbleListMgr = gameObject;
+        newBubble.GetComponent<Bubble>().Coor = coor;
 
         FindAllNearByEachBubble();
     }

@@ -169,13 +169,14 @@ public class Bubble : MonoBehaviour
     {
         if (coor != (new Vector2Int(-1, -1)))
         {
-            if (col.GetComponent<Bubble>().coor == (new Vector2Int(-1, -1)))
+            if (col.GetComponent<BubbleBullet>().CanCreateBubble)
             {
                 Vector2Int addCoor = FindNearestBlankCellToPosition(col.transform.position);
                 if (addCoor != new Vector2Int(-1, -1))
                 {
                     bubbleListMgr.GetComponent<BubbleListMgr>().AddBubbleToList(addCoor, col.gameObject);
                 }
+                col.GetComponent<BubbleBullet>().CanCreateBubble = false;
             }
         }
     }
