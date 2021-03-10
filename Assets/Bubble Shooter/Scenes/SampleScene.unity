@@ -163,7 +163,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -263,7 +263,7 @@ PrefabInstance:
     - target: {fileID: 6906716953665809680, guid: 23b5ef9e63d2dd24995fdbca6d31bb81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6906716953665809680, guid: 23b5ef9e63d2dd24995fdbca6d31bb81,
         type: 3}
@@ -322,54 +322,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23b5ef9e63d2dd24995fdbca6d31bb81, type: 3}
---- !u!1 &1542203470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1542203472}
-  - component: {fileID: 1542203471}
-  m_Layer: 0
-  m_Name: BubbleMgr
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1542203471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542203470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bedcecd6ddf054cb98d41fbf0e8fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bubbleTypeList:
-  - {fileID: 3089271471092360356, guid: fd5ab4ab2bfe04240a95b5fb8a3e3aea, type: 3}
-  - {fileID: 4158678671449800264, guid: 0fed0e4ba56393645baecd3a5239035b, type: 3}
-  - {fileID: 6141088881779690668, guid: 3769043abcedd03478542ac42677f4ee, type: 3}
-  bubbleSpace: {x: 1.05, y: 0.9}
---- !u!4 &1542203472
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542203470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7773556, y: 7.2369204, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1690406088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 6906716953665809680, guid: 23b5ef9e63d2dd24995fdbca6d31bb81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6906716953665809680, guid: 23b5ef9e63d2dd24995fdbca6d31bb81,
         type: 3}
@@ -453,6 +405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2014153515}
+  - component: {fileID: 2014153516}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Untagged
@@ -472,5 +425,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014153516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014153514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b9e196c1cf0c44bac108639ee9596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAngle: 80
+  space: 0.2
