@@ -57,9 +57,35 @@ public class BubbleListMgr : MonoBehaviour
         }
     }
 
-    void AddBubbleToList()
+    void UpdateBubbleList()
     {
 
+    }
+
+    public void AddBubbleToList(Vector2Int coor, GameObject obj)
+    {
+        if (coor.y > (range.y - 1))
+        {
+            List<GameObject> bubbleRow = new List<GameObject>();
+            for (int i = 0; i < range.x; i++)
+            {
+                bubbleRow.Add(null);
+            }
+            range.y++;
+            bubbleList.Insert(bubbleList.Count, bubbleRow);
+        }
+        bubbleList[coor.y][coor.x] = obj;
+        obj.GetComponent<Bubble>().BubbleListMgr = gameObject;
+        obj.GetComponent<Bubble>().Coor = coor;
+        Vector2 movePos = new Vector2();
+        if (coor.y % 2 == 0)
+            movePos.x = startPos.x + coor.x * bubbleSpace.x;
+        else
+            movePos.x = startPos.x + coor.x * bubbleSpace.x + bubbleSpace.x/2;
+        movePos.y = startPos.y - coor.y * bubbleSpace.y;
+        obj.transform.position = movePos;
+
+        FindAllNearByEachBubble();
     }
 
     void DisplayBubbleList(List<List<string>> bubbleDataList)
@@ -118,6 +144,7 @@ public class BubbleListMgr : MonoBehaviour
         }
         if (range.y == 0)
             range.y = coor.y;
+        Debug.Log("range y = " + range.y);
     }
 
     List<GameObject> FindClusterByColor()
