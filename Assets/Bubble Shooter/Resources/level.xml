@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <BubbleList>
-	<Level number="1" rangeX="6" rangeY="6"> 
+	<Level number="1" rangeX="12" rangeY="6"> 
 		<Row index="0">
 			<Val index="0">r</Val>
 			<Val index="1">b</Val>
@@ -8,6 +8,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="1">
 			<Val index="0">b</Val>
@@ -16,6 +22,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">b</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="2">
 			<Val index="0">r</Val>
@@ -24,6 +36,12 @@
 			<Val index="3">r</Val>
 			<Val index="4">b</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="3">
 			<Val index="0">g</Val>
@@ -32,6 +50,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="4">
 			<Val index="0">b</Val>
@@ -40,6 +64,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">r</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="5">
 			<Val index="0">r</Val>
@@ -48,9 +78,15 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">b</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 	</Level>
-	<Level number="2" rangeX="6" rangeY="8">
+	<Level number="2" rangeX="12" rangeY="8">
 		<Row index="0">
 			<Val index="0">r</Val>
 			<Val index="1">b</Val>
@@ -58,6 +94,12 @@
 			<Val index="3">0</Val>
 			<Val index="4">0</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="1">
 			<Val index="0">0</Val>
@@ -66,6 +108,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">0</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="2">
 			<Val index="0">r</Val>
@@ -74,6 +122,12 @@
 			<Val index="3">r</Val>
 			<Val index="4">b</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="3">
 			<Val index="0">g</Val>
@@ -82,6 +136,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">0</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="4">
 			<Val index="0">b</Val>
@@ -90,6 +150,12 @@
 			<Val index="3">0</Val>
 			<Val index="4">r</Val>
 			<Val index="5">r</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="5">
 			<Val index="0">r</Val>
@@ -98,6 +164,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">b</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="6">
 			<Val index="0">r</Val>
@@ -106,6 +178,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">g</Val>
 			<Val index="5">g</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 		<Row index="7">
 			<Val index="0">g</Val>
@@ -114,6 +192,12 @@
 			<Val index="3">g</Val>
 			<Val index="4">b</Val>
 			<Val index="5">b</Val>
+      <Val index="6">r</Val>
+      <Val index="7">b</Val>
+      <Val index="8">g</Val>
+      <Val index="9">g</Val>
+      <Val index="10">b</Val>
+      <Val index="11">r</Val>
 		</Row>
 	</Level>
 </BubbleList>	

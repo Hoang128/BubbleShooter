@@ -21,14 +21,24 @@ public class Shooter : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Vector3 mouseDelta = Input.mousePosition - lastMouseCoordinate;
+            if (!GameObject.FindGameObjectWithTag("Bullet"))
+            {
+                Vector3 mouseDelta = Input.mousePosition - lastMouseCoordinate;
 
-            if (mouseDelta != new Vector3(0, 0, 0))
+                if (mouseDelta != new Vector3(0, 0, 0))
+                {
+                    updateAimLineList();
+                }
+                lastMouseCoordinate = Input.mousePosition;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!GameObject.FindGameObjectWithTag("Bullet"))
             {
                 updateAimLineList();
             }
-            lastMouseCoordinate = Input.mousePosition;
-            Vector2 touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -37,6 +47,7 @@ public class Shooter : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletTypes[0], transform.position, transform.rotation);
                 bullet.GetComponent<BubbleBullet>().MoveRayList = new Stack<Ray2D>(aimLineList);
+                aimLineList.Clear();
             }
         }
     }

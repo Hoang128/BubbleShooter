@@ -22,6 +22,10 @@ public class BubbleBullet : MonoBehaviour
     {
         moveRayList = new Stack<Ray2D>();
     }
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 
     // Update is called once per frame
     void Update()

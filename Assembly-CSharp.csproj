@@ -67,7 +67,6 @@
     <Compile Include="Assets\Bubble Shooter\Scripts\Bubble.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\BubbleBullet.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\BubbleListMgr.cs" />
-    <Compile Include="Assets\Bubble Shooter\Scripts\InputMgr.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\Shooter.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\XmlHandler.cs" />
     <None Include="Assets\Bubble Shooter\Resources\level.xml" />

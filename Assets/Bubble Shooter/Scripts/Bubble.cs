@@ -100,6 +100,7 @@ public class Bubble : MonoBehaviour
 
     Vector2Int FindNearestBlankCellToPosition(Vector2 position)
     {
+        Debug.Log("Position = " + position.x + ", " + position.y);
         float minDistance = 1000f;
         Vector2Int nearestCoor = new Vector2Int(-1, -1);
         Vector2 startPos = bubbleListMgr.GetComponent<BubbleListMgr>().StartPos;
@@ -109,9 +110,13 @@ public class Bubble : MonoBehaviour
             if (aroundList.bubblesAround[i] == null)
             {
                 Vector2 blankNearPos = new Vector2(0, 0);
-                blankNearPos.x = startPos.x + (space.x * aroundList.bubbleCoors[i].x);
-                blankNearPos.y = startPos.y + (space.y * aroundList.bubbleCoors[i].y);
+                if (aroundList.bubbleCoors[i].y % 2 == 0)
+                    blankNearPos.x = startPos.x + (space.x * aroundList.bubbleCoors[i].x);
+                else
+                    blankNearPos.x = startPos.x + space.x/2 + (space.x * aroundList.bubbleCoors[i].x);
+                blankNearPos.y = startPos.y - (space.y * aroundList.bubbleCoors[i].y);
                 float distance = Vector2.Distance(position, blankNearPos);
+                Debug.Log("Evaluate near by coor = " + aroundList.bubbleCoors[i].x + ", " + aroundList.bubbleCoors[i].y + " & distance = " + distance);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -123,8 +128,14 @@ public class Bubble : MonoBehaviour
 
         if (coor.y == (bubbleListMgr.GetComponent<BubbleListMgr>().Range.y - 1))
         {
-            Vector2 blankNearPos = new Vector2(startPos.x + space.x * coor.x, startPos.y - space.y * (coor.y + 1));
+            Vector2 blankNearPos = new Vector2();
+            if ((coor.y + 1)%2 == 0)
+                blankNearPos.x = startPos.x + space.x * coor.x;
+            else
+                blankNearPos.x = startPos.x + space.x / 2 + coor.x;
+            blankNearPos.y = startPos.y - space.y * (coor.y + 1);
             float distance = Vector2.Distance(position, blankNearPos);
+            Debug.Log("Evaluate near by coor = " + coor.x + ", " + (coor.y + 1) + " & distance = " + distance);
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -136,8 +147,10 @@ public class Bubble : MonoBehaviour
             {
                 if (coor.x > 0)
                 {
-                    blankNearPos = new Vector2(startPos.x + space.x * (coor.x - 1), startPos.y - space.y * (coor.y + 1));
+                    blankNearPos.x = startPos.x + space.x / 2 + space.x * (coor.x - 1);
+                    blankNearPos.y = startPos.y - space.y * (coor.y + 1);
                     distance = Vector2.Distance(position, blankNearPos);
+                    Debug.Log("Evaluate near by coor = " + (coor.x - 1) + ", " + (coor.y + 1) + " & distance = " + distance);
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -150,8 +163,10 @@ public class Bubble : MonoBehaviour
             {
                 if (coor.x < bubbleListMgr.GetComponent<BubbleListMgr>().Range.x - 1)
                 {
-                    blankNearPos = new Vector2(startPos.x + space.x * (coor.x + 1), startPos.y - space.y * (coor.y + 1));
+                    blankNearPos.x = startPos.x + space.x * (coor.x + 1);
+                    blankNearPos.y = startPos.y - space.y * (coor.y + 1);
                     distance = Vector2.Distance(position, blankNearPos);
+                    Debug.Log("Evaluate near by coor = " + (coor.x + 1) + ", " + (coor.y + 1) + " & distance = " + distance);
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -162,6 +177,7 @@ public class Bubble : MonoBehaviour
             }
         }
 
+        Debug.Log("Final nearest coor = " + nearestCoor.x + ", " + nearestCoor.y);
         return nearestCoor;
     }
 
