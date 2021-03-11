@@ -57,9 +57,14 @@ public class BubbleListMgr : MonoBehaviour
         }
     }
 
-    void UpdateBubbleList()
+    public void UpdateBubbleList(Vector2Int coor, GameObject obj)
     {
+        AddBubbleToList(coor, obj);
 
+        List<GameObject> sameColorCluster = FindBubbleClusterSameColor(coor);
+
+        if (sameColorCluster.Count >= 3)
+            DestroyClusterOfBubble(sameColorCluster);
     }
 
     public void AddBubbleToList(Vector2Int coor, GameObject obj)
@@ -149,9 +154,74 @@ public class BubbleListMgr : MonoBehaviour
         Debug.Log("range y = " + range.y);
     }
 
-    List<GameObject> FindClusterByColor()
+    void DestroyClusterOfBubble(List<GameObject> bubbleCluster)
     {
-        List<GameObject> bubbleList = new List<GameObject>();
-        return bubbleList;
+        foreach (GameObject bubble in bubbleCluster)
+        {
+            Vector2Int bubbleCoor = bubble.GetComponent<Bubble>().Coor;
+            GameObject.Destroy(bubbleList[bubbleCoor.y][bubbleCoor.x]);
+            bubbleList[bubbleCoor.y][bubbleCoor.x] = null;
+        }
+
+        FindAllNearByEachBubble();
+    }
+
+    List<GameObject> FindBubbleClusterSameColor(Vector2Int position)
+    {
+        Bubble.BubbleType rootType = bubbleList[position.y][position.x].GetComponent<Bubble>().TypeBubble;
+
+        List<GameObject> bubbleCluster = new List<GameObject>();
+
+        GameObject rootBubble = bubbleList[position.y][position.x];
+
+        Stack<GameObject> bubbleStack = new Stack<GameObject>();
+
+        bubbleCluster.Add(rootBubble);
+        bubbleStack.Push(rootBubble);
+
+        while(bubbleStack.Count > 0)
+        {
+            GameObject bubbleFinder = bubbleStack.Pop();
+            List<GameObject> nearbyBubbleFinder;
+            nearbyBubbleFinder = new List<GameObject>(bubbleFinder.GetComponent<Bubble>().AroundBubbleList.bubblesAround);
+
+            foreach (GameObject bubble in nearbyBubbleFinder)
+            {
+                if (bubble != null)
+                {
+                    if (bubbleCluster.Count > 0)
+                    {
+                        bool duplicated = false;
+                        foreach (GameObject bubbleInCluster in bubbleCluster)
+                        {
+                            if (bubble.GetComponent<Bubble>().Coor == bubbleInCluster.GetComponent<Bubble>().Coor)
+                            {
+                                duplicated = true;
+                                break;
+                            }
+                        }
+                        if (!duplicated)
+                        {
+                            if (bubble.GetComponent<Bubble>().TypeBubble == rootType)
+                            {
+                                bubbleCluster.Add(bubble);
+                                bubbleStack.Push(bubble);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (bubble.GetComponent<Bubble>().TypeBubble == rootType)
+                        {
+                            bubbleCluster.Add(bubble);
+                            bubbleStack.Push(bubble);
+                        }
+                    }
+                }
+            }
+        }
+        Debug.Log("done!");
+        
+        return bubbleCluster;
     }
 }

@@ -5,9 +5,9 @@ using UnityEditor;
 
 public class Bubble : MonoBehaviour
 {
-    enum BubbleType { RED, GREEN, BLUE };
+    public enum BubbleType { RED, GREEN, BLUE };
 
-    struct AroundList
+    public struct AroundList
     {
         public List<GameObject> bubblesAround;
         public List<Vector2Int> bubbleCoors;
@@ -22,6 +22,8 @@ public class Bubble : MonoBehaviour
     private BubbleType Type { get => type; set => type = value; }
     public Vector2Int Coor { get => coor; set => coor = value; }
     public Vector2Int Coor1 { get => coor; set => coor = value; }
+    public AroundList AroundBubbleList { get => aroundList; set => aroundList = value; }
+    public BubbleType TypeBubble { get => type; set => type = value; }
 
     // Start is called before the first frame update
     void Awake()
@@ -190,7 +192,7 @@ public class Bubble : MonoBehaviour
                 Vector2Int addCoor = FindNearestBlankCellToPosition(col.transform.position);
                 if (addCoor != new Vector2Int(-1, -1))
                 {
-                    bubbleListMgr.GetComponent<BubbleListMgr>().AddBubbleToList(addCoor, col.gameObject);
+                    bubbleListMgr.GetComponent<BubbleListMgr>().UpdateBubbleList(addCoor, col.gameObject);
                 }
                 col.GetComponent<BubbleBullet>().CanCreateBubble = false;
             }
