@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleTypeList:
-  - {fileID: 3089271471092360356, guid: fd5ab4ab2bfe04240a95b5fb8a3e3aea, type: 3}
-  - {fileID: 4158678671449800264, guid: 0fed0e4ba56393645baecd3a5239035b, type: 3}
   - {fileID: 6141088881779690668, guid: 3769043abcedd03478542ac42677f4ee, type: 3}
-  bubbleSpace: {x: 1.05, y: 0.9}
+  - {fileID: 3089271471092360356, guid: fd5ab4ab2bfe04240a95b5fb8a3e3aea, type: 3}
+  - {fileID: 6141088881779690668, guid: 3769043abcedd03478542ac42677f4ee, type: 3}
+  - {fileID: 4158678671449800264, guid: 0fed0e4ba56393645baecd3a5239035b, type: 3}
+  bubbleSpace: {x: 1.3, y: 1.15}

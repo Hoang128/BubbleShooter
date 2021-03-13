@@ -15,10 +15,11 @@ public class Bubble : MonoBehaviour
 
     AroundList aroundList;
     Vector2Int coor;
-    GameObject bubbleListMgr;
+    GameObject bubbleMapMgr;
+    int keyType = 0;
     [SerializeField] BubbleType type;
 
-    public GameObject BubbleListMgr { get => bubbleListMgr; set => bubbleListMgr = value; }
+    public GameObject BubbleMapMgr { get => bubbleMapMgr; set => bubbleMapMgr = value; }
     private BubbleType Type { get => type; set => type = value; }
     public Vector2Int Coor { get => coor; set => coor = value; }
     public Vector2Int Coor1 { get => coor; set => coor = value; }
@@ -45,55 +46,61 @@ public class Bubble : MonoBehaviour
             aroundList.bubblesAround.Clear();
         if (aroundList.bubbleCoors.Count > 0)
             aroundList.bubbleCoors.Clear();
-        if (coor.x < bubbleListMgr.GetComponent<BubbleListMgr>().Range.x - 1)
+        if (coor.x < bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[Coor.y].Count - 1)
         {
-            aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y][coor.x + 1]);
+            aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y][coor.x + 1]);
             aroundList.bubbleCoors.Add(new Vector2Int(coor.x + 1, coor.y));
         }
         if (coor.x > 0)
         {
-            aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y][coor.x - 1]);
+            aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y][coor.x - 1]);
             aroundList.bubbleCoors.Add(new Vector2Int(coor.x - 1, coor.y));
         }
 
         if (coor.y > 0)
         {
-            aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y - 1][coor.x]);
-            aroundList.bubbleCoors.Add(new Vector2Int(coor.x, coor.y - 1));
-            if (coor.y % 2 == 0)
+            if (coor.x < (bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x - 1))
+            {
+                aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y - 1][coor.x]);
+                aroundList.bubbleCoors.Add(new Vector2Int(coor.x, coor.y - 1));
+            }
+            if (bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[Coor.y].Count == 12)
             {
                 if (coor.x > 0)
                 {
-                    aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y - 1][coor.x - 1]);
+                    aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y - 1][coor.x - 1]);
                     aroundList.bubbleCoors.Add(new Vector2Int(coor.x - 1, coor.y - 1));
                 }
             }
             else
             {
-                if (coor.x < bubbleListMgr.GetComponent<BubbleListMgr>().Range.x - 1)
+                if (coor.x < bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[Coor.y - 1].Count)
                 {
-                    aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y - 1][coor.x + 1]);
+                    aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y - 1][coor.x + 1]);
                     aroundList.bubbleCoors.Add(new Vector2Int(coor.x + 1, coor.y - 1));
                 }
             }
         }
-        if (coor.y < bubbleListMgr.GetComponent<BubbleListMgr>().Range.y - 1)
+        if (coor.y < (bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.y - 1))
         {
-            aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y + 1][coor.x]);
-            aroundList.bubbleCoors.Add(new Vector2Int(coor.x, coor.y + 1));
-            if (coor.y % 2 == 0)
+            if (coor.x < (bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x - 1))
+            {
+                aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 1][coor.x]);
+                aroundList.bubbleCoors.Add(new Vector2Int(coor.x, coor.y + 1));
+            }
+            if (bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[Coor.y].Count == 12)
             {
                 if (coor.x > 0)
                 {
-                    aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y + 1][coor.x - 1]);
+                    aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 1][coor.x - 1]);
                     aroundList.bubbleCoors.Add(new Vector2Int(coor.x - 1, coor.y + 1));
                 }
             }
             else
             {
-                if (coor.x < bubbleListMgr.GetComponent<BubbleListMgr>().Range.x - 1)
+                if (coor.x < bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[Coor.y + 1].Count)
                 {
-                    aroundList.bubblesAround.Add(bubbleListMgr.GetComponent<BubbleListMgr>().BubbleList[coor.y + 1][coor.x + 1]);
+                    aroundList.bubblesAround.Add(bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 1][coor.x + 1]);
                     aroundList.bubbleCoors.Add(new Vector2Int(coor.x + 1, coor.y + 1));
                 }
             }
@@ -105,8 +112,8 @@ public class Bubble : MonoBehaviour
         Debug.Log("Position = " + position.x + ", " + position.y);
         float minDistance = 1000f;
         Vector2Int nearestCoor = new Vector2Int(-1, -1);
-        Vector2 startPos = bubbleListMgr.GetComponent<BubbleListMgr>().StartPos;
-        Vector2 space = bubbleListMgr.GetComponent<BubbleListMgr>().BubbleSpace;
+        Vector2 startPos = bubbleMapMgr.transform.position;
+        Vector2 space = bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleSpace;
         for(int i = 0; i < aroundList.bubblesAround.Count; i++)
         {
             if (aroundList.bubblesAround[i] == null)
@@ -128,7 +135,35 @@ public class Bubble : MonoBehaviour
             }
         }
 
-        if (coor.y == (bubbleListMgr.GetComponent<BubbleListMgr>().Range.y - 1))
+        if (coor.x == 0)
+        {
+            if (nearestCoor == new Vector2Int(-1, -1))
+            {
+                if (coor.y < (bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.y - 1))
+                {
+                    if (bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 2][0] == null)
+                        return new Vector2Int(0, coor.y + 2);
+                }
+                else
+                    return new Vector2Int(0, coor.y + 2);
+            }
+        }
+
+        if (coor.x == bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x)
+        {
+            if (nearestCoor == new Vector2Int(-1, -1))
+            {
+                if (bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 2][bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x] == null)
+                {
+                    if (bubbleMapMgr.GetComponent<BubbleMapMgr>().BubbleList[coor.y + 2][bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x] == null)
+                        return new Vector2Int(bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x, coor.y + 2);
+                }
+                else
+                    return new Vector2Int(bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x, coor.y + 2);
+            }
+        }
+
+        if (coor.y == (bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.y - 1))
         {
             Vector2 blankNearPos = new Vector2();
             if ((coor.y + 1)%2 == 0)
@@ -163,7 +198,7 @@ public class Bubble : MonoBehaviour
             }
             else
             {
-                if (coor.x < bubbleListMgr.GetComponent<BubbleListMgr>().Range.x - 1)
+                if (coor.x < bubbleMapMgr.GetComponent<BubbleMapMgr>().Range.x - 1)
                 {
                     blankNearPos.x = startPos.x + space.x * (coor.x + 1);
                     blankNearPos.y = startPos.y - space.y * (coor.y + 1);
@@ -192,14 +227,15 @@ public class Bubble : MonoBehaviour
                 Vector2Int addCoor = FindNearestBlankCellToPosition(col.transform.position);
                 if (addCoor != new Vector2Int(-1, -1))
                 {
-                    bubbleListMgr.GetComponent<BubbleListMgr>().UpdateBubbleList(addCoor, col.gameObject);
+                    bubbleMapMgr.GetComponent<BubbleMapMgr>().UpdateBubbleList(addCoor, col.gameObject);
                 }
                 col.GetComponent<BubbleBullet>().CanCreateBubble = false;
             }
         }
     }
 
-    public void OnDrawGizmos()
+#if UNITY_EDITOR
+    void OnDrawGizmos()
     {
         float yPos = 0;
         Handles.Label(transform.position + new Vector3(0f, yPos, 0f), coor.x + ", " + coor.y);
@@ -222,4 +258,5 @@ public class Bubble : MonoBehaviour
             yPos -= 0.1f;
         }
     }
+#endif
 }

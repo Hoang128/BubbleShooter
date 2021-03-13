@@ -45,7 +45,7 @@ public class Shooter : MonoBehaviour
         {
             if (aimLineList.Count != 0)
             {
-                GameObject bullet = Instantiate(bulletTypes[0], transform.position, transform.rotation);
+                GameObject bullet = Instantiate(bulletTypes[0], transform.position, new Quaternion(0, 0, 0, 0));
                 bullet.GetComponent<BubbleBullet>().MoveRayList = new Stack<Ray2D>(aimLineList);
                 aimLineList.Clear();
             }
@@ -59,11 +59,18 @@ public class Shooter : MonoBehaviour
         Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
         Ray2D aimRay = new Ray2D(transform.position, touchPoint - pos2D);
 
-        if (Vector2.Angle(Vector2.up, aimRay.direction) > maxAngle)
+        float aimAngle = Vector2.Angle(Vector2.up, aimRay.direction);
+
+        if (aimAngle > maxAngle)
             return;
 
         bool aiming = true;
         aimLineList.Push(aimRay);
+        
+        if (transform.position.x <= touchPoint.x)
+            transform.eulerAngles = new Vector3(0, 0, -aimAngle);
+        else
+            transform.eulerAngles = new Vector3(0, 0, aimAngle);
 
         while (aiming)
         {
@@ -78,6 +85,7 @@ public class Shooter : MonoBehaviour
                 aiming = false;
         }
     }
+
 
     private void OnDrawGizmos()
     {
