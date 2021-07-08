@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4BC1E254-A36B-AC3F-05A4-137DF664BAAF}</ProjectGuid>
+    <ProjectGuid>{7B9377AC-7FAB-649C-CCD8-227A2FE02483}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,21 +57,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Bubble Shooter\Scripts\BubbleBullet.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\BulletNumberIndexer.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\BubbleMapMgr.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\Bubble.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\XmlHandler.cs" />
     <Compile Include="Assets\Bubble Shooter\Scripts\Shooter.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\ChangeBubbleButton.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\BulletMgr.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\Bird.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\GameplayMgr.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\BirdIndexer.cs" />
+    <Compile Include="Assets\Bubble Shooter\Scripts\ScoreIndexer.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Bubble Shooter\Resources\Level_1_8.xml" />
+     <None Include="Assets\Spine\version.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_5.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\water-ball\water.atlas.txt" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\Bigpandamom\Bigpandamom.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_10.xml" />
      <None Include="Assets\Bubble Shooter\Resources\level.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\catwin-anim\Win.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_3.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\anim\char-ingame.atlas.txt" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\bird-anim\bird.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_4.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\sun-ball-anim\sun-ball.atlas.txt" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\cat-lose-anim\CatLose.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_2.xml" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_6.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\fire-ball\fire.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_9.xml" />
+     <None Include="Assets\Bubble Shooter\Sprites\Animation\leaf-ball\leaf.atlas.txt" />
      <None Include="Assets\Bubble Shooter\Resources\Level_1_7.xml" />
      <None Include="Assets\Bubble Shooter\Resources\Level_2_1.xml" />
     <Reference Include="UnityEngine">
@@ -721,6 +738,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="spine-unity-examples-editor.csproj">
+      <Project>{0B50AF33-4856-BDA2-0ED6-6A34DE2ACDDB}</Project>
+      <Name>spine-unity-examples-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{84D6EC4F-CB82-7ABF-BAE0-D731DAB5D07F}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-examples.csproj">
+      <Project>{07B114A8-4EA8-D6A1-A064-DFDD69C54DA0}</Project>
+      <Name>spine-unity-examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{B0420448-EC39-9864-A7FA-8BFFC041AB18}</Project>
+      <Name>spine-unity-editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

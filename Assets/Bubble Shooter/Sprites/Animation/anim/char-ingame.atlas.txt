@@ -1,0 +1,125 @@
+
+char-ingame.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ChanP
+  rotate: true
+  xy: 555, 4
+  size: 51, 65
+  orig: 51, 65
+  offset: 0, 0
+  index: -1
+ChanT
+  rotate: false
+  xy: 513, 57
+  size: 50, 69
+  orig: 50, 69
+  offset: 0, 0
+  index: -1
+Eye
+  rotate: false
+  xy: 59, 2
+  size: 53, 13
+  orig: 53, 13
+  offset: 0, 0
+  index: -1
+Face
+  rotate: false
+  xy: 189, 25
+  size: 137, 101
+  orig: 137, 101
+  offset: 0, 0
+  index: -1
+Gear
+  rotate: false
+  xy: 401, 34
+  size: 47, 92
+  orig: 47, 92
+  offset: 0, 0
+  index: -1
+Khan
+  rotate: true
+  xy: 2, 6
+  size: 120, 55
+  orig: 120, 55
+  offset: 0, 0
+  index: -1
+LUOI
+  rotate: false
+  xy: 614, 58
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Layer-29
+  rotate: true
+  xy: 59, 17
+  size: 109, 128
+  orig: 109, 128
+  offset: 0, 0
+  index: -1
+Layer-32-copy
+  rotate: true
+  xy: 114, 2
+  size: 13, 32
+  orig: 13, 32
+  offset: 0, 0
+  index: -1
+MOM
+  rotate: false
+  xy: 401, 5
+  size: 48, 27
+  orig: 48, 27
+  offset: 0, 0
+  index: -1
+MUI
+  rotate: true
+  xy: 614, 84
+  size: 42, 33
+  orig: 42, 33
+  offset: 0, 0
+  index: -1
+Ngon
+  rotate: false
+  xy: 189, 7
+  size: 15, 16
+  orig: 15, 16
+  offset: 0, 0
+  index: -1
+TaiP
+  rotate: false
+  xy: 565, 58
+  size: 47, 68
+  orig: 47, 68
+  offset: 0, 0
+  index: -1
+TaiT
+  rotate: false
+  xy: 450, 43
+  size: 61, 83
+  orig: 61, 83
+  offset: 0, 0
+  index: -1
+TayP
+  rotate: false
+  xy: 328, 25
+  size: 71, 101
+  orig: 71, 101
+  offset: 0, 0
+  index: -1
+TayT1
+  rotate: false
+  xy: 493, 4
+  size: 60, 37
+  orig: 60, 37
+  offset: 0, 0
+  index: -1
+TayT2
+  rotate: true
+  xy: 451, 3
+  size: 38, 40
+  orig: 38, 40
+  offset: 0, 0
+  index: -1

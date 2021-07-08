@@ -1,25 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class BubbleMapMgr : MonoBehaviour
 {
-    enum MapState {IDLE, MOVE, UPDATE};
-    MapState mapState = MapState.IDLE;
+    public enum MapState {IDLE, MOVE, UPDATE};
+    MapState state = MapState.IDLE;
     public class BubbleData
     {
         Vector2Int gridPos;
         int typeNum;
         int typeKey;
-        
+        int randomType;
 
         public Vector2Int GridPos { get => gridPos; set => gridPos = value; }
         public int TypeNum { get => typeNum; set => typeNum = value; }
         public int TypeKey { get => typeKey; set => typeKey = value; }
+        public int RandomType { get => randomType; set => randomType = value; }
     }
     [SerializeField] GameObject[] bubbleTypeList;
+    [SerializeField] GameObject keyObject;
     [SerializeField] Vector2 bubbleSpace;
     [SerializeField] GameObject shooter;
+    [SerializeField] GameObject objGameplayMgr;
     [SerializeField] float vSpace;
     [SerializeField] float yPosLimit;
     [SerializeField] float mapMoveSpd = 4f;
@@ -27,20 +32,36 @@ public class BubbleMapMgr : MonoBehaviour
     Vector2Int range = new Vector2Int(12, 0);
     float currentCeilPosY = 0;
     bool isFirstRowOdd = true;
+    BulletMgr bulletMgr;
+    int[] rColorEnable;
+    int[] rColorSet;
+    GameplayMgr gameplayMgr;
 
     public List<List<GameObject>> BubbleList { get => bubbleList; set => bubbleList = value; }
     public Vector2Int Range { get => range; set => range = value; }
     public Vector2 BubbleSpace { get => bubbleSpace; set => bubbleSpace = value; }
     public GameObject[] BubbleTypeList { get => bubbleTypeList; set => bubbleTypeList = value; }
+    public GameObject KeyObject { get => keyObject; set => keyObject = value; }
+    public MapState State { get => state; set => state = value; }
+    public GameplayMgr GameplayMgr { get => gameplayMgr; set => gameplayMgr = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         bubbleList = new List<List<GameObject>>();
+        rColorEnable = new int[6];
+        for (int i = 0; i < 6; i++)
+        {
+            rColorEnable[i] = 0;
+        }
 
-        //Load bubble list (follow the prototype)
+        gameplayMgr = objGameplayMgr.GetComponent<GameplayMgr>();
+
+        //Load bubble list (follow file xml)
+        bulletMgr = GameObject.Find("BulletMgr").GetComponent<BulletMgr>();
+        rColorEnable = LoadRandomColorList(1, 2);
         List<BubbleData> bubbleXmlList = new List<BubbleData>();
-        bubbleXmlList = LoadBubbleXmlList(1, 4);
+        bubbleXmlList = LoadBubbleXmlList(1, 2);
         DisplayBubbleList(bubbleXmlList);
         FindAllNearByEachBubble();
         UpdateCurrentCeilPosY();
@@ -51,7 +72,7 @@ public class BubbleMapMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mapState == MapState.MOVE)
+        if (state == MapState.MOVE)
         {
             if (Mathf.Abs(transform.position.y - currentCeilPosY) > mapMoveSpd * (Time.deltaTime))
             {
@@ -59,14 +80,51 @@ public class BubbleMapMgr : MonoBehaviour
                 transform.position = new Vector2(transform.position.x, newPosY);
             }
             else
-                mapState = MapState.IDLE;
+                state = MapState.IDLE;
+        }
+    }
+
+    int[] LoadRandomColorList(int level, int levelSub)
+    {
+        XmlHandler xmlHandler = new XmlHandler();
+        int[] rColorEnable = xmlHandler.LoadLevelRandomColor(level, levelSub);
+        return rColorEnable;
+    }
+
+    void SetRandomColor()
+    {
+        if (rColorSet.Length > 0)
+        {
+            List<int> colorList = new List<int>();
+
+            for (int i = 0; i < rColorEnable.Length; i++)
+            {
+                if (rColorEnable[i] == 1)
+                    colorList.Add(i);
+            }
+
+            if (colorList.Count > 0)
+            {
+                colorList = colorList.OrderBy(x => Random.value).ToList();
+                for (int i = 0; i < rColorSet.Length; i++)
+                {
+                    if (colorList.Count >= i)
+                        rColorSet[i] = colorList[i];
+                    else
+                        rColorSet[i] = colorList[0];
+                }
+            }
         }
     }
 
     List<BubbleData> LoadBubbleXmlList(int level, int levelSub)
     {
         XmlHandler xmlHandler = new XmlHandler();
-        List<BubbleData> bubbleList = xmlHandler.LoadBubbleLevel(level, levelSub);
+        List<BubbleData> bubbleList = xmlHandler.LoadBubbleLevelMap(level, levelSub);
+
+        //find max color set
+        int maxColorSet = 0;
+        uint bird = 0;
 
         //find range y
         int minY = 1000;
@@ -77,8 +135,13 @@ public class BubbleMapMgr : MonoBehaviour
                 maxY = bubbleData.GridPos.y;
             if (bubbleData.GridPos.y < minY)
                 minY = bubbleData.GridPos.y;
+            if (bubbleData.RandomType > maxColorSet)
+                maxColorSet = bubbleData.RandomType;
+            if (bubbleData.TypeKey > 0)
+                bird++;
         }
 
+        rColorSet = new int[maxColorSet + 1];
         range.y = maxY - minY + 1;
 
         foreach(BubbleData bubbleData in bubbleList)
@@ -92,6 +155,10 @@ public class BubbleMapMgr : MonoBehaviour
         else
             isFirstRowOdd = true;
 
+        gameplayMgr.BirdInTrap = bird;
+        gameplayMgr.BirdIndexer.GetMaxBird(bird);
+        gameplayMgr.BirdIndexer.UpdateBirdIndexerText(bird);
+
         return bubbleList;
     }
 
@@ -102,11 +169,12 @@ public class BubbleMapMgr : MonoBehaviour
             currentCeilPosY = Mathf.Clamp(shooter.transform.position.y + vSpace + ((range.y - 1) * bubbleSpace.y), yPosLimit, Mathf.Infinity);
         else
             currentCeilPosY = yPosLimit;
+        FindAllNearByEachBubble();
     }
 
     public void UpdateBubbleList(Vector2Int coor, GameObject obj)
     {
-        mapState = MapState.UPDATE;
+        state = MapState.UPDATE;
 
         AddBubbleToList(coor, obj);
 
@@ -115,9 +183,16 @@ public class BubbleMapMgr : MonoBehaviour
         List<GameObject> rearOfsameColorCluster = new List<GameObject>(FindRearBubblesOfSameColorCluster(sameColorCluster));
 
         if (sameColorCluster.Count >= 3)
-            DestroyClusterOfBubble(sameColorCluster);
+        {
+            DestroyClusterOfBubble(sameColorCluster, false);
 
-        DestroyAllIsolatedBubbleCluster(rearOfsameColorCluster);
+            foreach (GameObject bubble in rearOfsameColorCluster)
+            {
+                bubble.GetComponent<Bubble>().GetNearByBubble();
+            }
+
+            DestroyAllIsolatedBubbleCluster(rearOfsameColorCluster);
+        }
 
         for(int i = bubbleList.Count - 1; i >= 0; i--)
         {
@@ -140,13 +215,21 @@ public class BubbleMapMgr : MonoBehaviour
 
         UpdateCurrentCeilPosY();
 
-        mapState = MapState.MOVE;
+        gameplayMgr.ScoreIndexer.UpdateScoreIndexerText(gameplayMgr.Score);
+        gameplayMgr.UpdateGameplayState();
 
-
+        if (gameplayMgr.State == GameplayMgr.GameplayState.WIN)
+            Debug.Log("PLAYER WIN!");
+        else if (gameplayMgr.State == GameplayMgr.GameplayState.LOSE)
+            Debug.Log("PLAYER LOSE!");
+        else
+            state = MapState.MOVE;
     }
 
     void DisplayBubbleList(List<BubbleData> bubbleDataList)
     {
+        SetRandomColor();
+
         for(int i = 0; i < range.y; i++)
         {
             bubbleList.Add(new List<GameObject>());
@@ -194,14 +277,21 @@ public class BubbleMapMgr : MonoBehaviour
             GameObject bubbleInstance = bubbleTypeList[0];
             if (bubbleData.TypeNum < bubbleTypeList.Length)
                 bubbleInstance = bubbleTypeList[bubbleData.TypeNum];
+            else if (bubbleData.TypeNum == 27)
+            {
+                bubbleInstance = bubbleTypeList[rColorSet[bubbleData.RandomType]];
+            }
 
             createPos.x = transform.position.x + bubbleData.GridPos.x * bubbleSpace.x + spacing;
             createPos.y = transform.position.y - bubbleData.GridPos.y * bubbleSpace.y;
             bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x] = Instantiate(bubbleInstance, createPos, transform.rotation);
-            bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x].GetComponent<Bubble>().BubbleMapMgr = gameObject;
+            bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x].GetComponent<Bubble>().BubbleMapMgr = this;
             bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x].GetComponent<Bubble>().Coor = bubbleData.GridPos;
             bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x].GetComponent<Bubble>().transform.parent = transform;
+            bubbleList[bubbleData.GridPos.y][bubbleData.GridPos.x].GetComponent<Bubble>().KeyType = bubbleData.TypeKey;
         }
+
+        bulletMgr.InitBulletPool();
     }
 
     void FindAllNearByEachBubble()
@@ -221,6 +311,9 @@ public class BubbleMapMgr : MonoBehaviour
 
     public void AddBubbleToList(Vector2Int coor, GameObject obj)
     {
+        GameObject newBubbleType = bubbleTypeList[(int)obj.GetComponent<BubbleBullet>().BulletType];
+        
+
         Destroy(obj);
         int currentRangeX = range.x;
         if (bubbleList[coor.y - 1].Count == currentRangeX)
@@ -243,25 +336,39 @@ public class BubbleMapMgr : MonoBehaviour
             movePos.x = transform.position.x + coor.x * bubbleSpace.x + bubbleSpace.x / 2;
         movePos.y = transform.position.y - coor.y * bubbleSpace.y;
         
-        GameObject newBubble = Instantiate(bubbleTypeList[0], movePos, transform.rotation);
+        GameObject newBubble = Instantiate(newBubbleType, movePos, transform.rotation);
         bubbleList[coor.y][coor.x] = newBubble;
-        newBubble.GetComponent<Bubble>().BubbleMapMgr = gameObject;
+        newBubble.GetComponent<Bubble>().BubbleMapMgr = this;
         newBubble.GetComponent<Bubble>().Coor = coor;
         newBubble.transform.parent = transform;
 
-        FindAllNearByEachBubble();
+        newBubble.GetComponent<Bubble>().GetNearByBubble();
+        List<GameObject> newBubbleNearByList = newBubble.GetComponent<Bubble>().AroundBubbleList.bubblesAround;
+        foreach (GameObject bubble in newBubbleNearByList)
+        {
+            if (bubble != null)
+            {
+                bubble.GetComponent<Bubble>().GetNearByBubble();
+            }
+        }
     }
 
-    void DestroyClusterOfBubble(List<GameObject> bubbleCluster)
+    void DestroyClusterOfBubble(List<GameObject> bubbleCluster, bool isIsolated)
     {
         foreach (GameObject bubble in bubbleCluster)
         {
             Vector2Int bubbleCoor = bubble.GetComponent<Bubble>().Coor;
+            Bubble.BubbleState state;
+            if (isIsolated)
+                state = Bubble.BubbleState.FALL;
+            else
+                state = Bubble.BubbleState.EXPLODE;
+            bubbleList[bubbleCoor.y][bubbleCoor.x].GetComponent<Bubble>().ChangeBubbleState(state);
+            bubbleList[bubbleCoor.y][bubbleCoor.x].GetComponent<Bubble>().FreeBird();
+            gameplayMgr.BirdIndexer.UpdateBirdIndexerText(gameplayMgr.BirdInTrap);
             GameObject.Destroy(bubbleList[bubbleCoor.y][bubbleCoor.x]);
             bubbleList[bubbleCoor.y][bubbleCoor.x] = null;
         }
-
-        FindAllNearByEachBubble();
     }
 
     void DestroyAllIsolatedBubbleCluster(List<GameObject> inputBubbleList)
@@ -292,7 +399,7 @@ public class BubbleMapMgr : MonoBehaviour
             }
 
             if (IsClusterIsolatedByCoor(bubbleCluster))
-                DestroyClusterOfBubble(bubbleCluster);
+                DestroyClusterOfBubble(bubbleCluster, true);
         }
     }
 
@@ -448,4 +555,10 @@ public class BubbleMapMgr : MonoBehaviour
 
         return rearBubblesList;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+    }
+#endif
 }

@@ -1,6 +1,5 @@
-
-Library/
-
-Logs/
-
-Temp/
+/Library/
+/Logs/
+/Temp/
+/obj/
+/.vs/

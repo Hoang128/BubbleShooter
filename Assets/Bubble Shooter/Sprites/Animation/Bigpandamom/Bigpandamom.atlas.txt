@@ -1,0 +1,216 @@
+
+Bigpandamom.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Ban chan_p
+  rotate: false
+  xy: 394, 85
+  size: 56, 17
+  orig: 56, 17
+  offset: 0, 0
+  index: -1
+Ban chan_t
+  rotate: false
+  xy: 337, 84
+  size: 55, 18
+  orig: 55, 18
+  offset: 0, 0
+  index: -1
+Bong duoi dau
+  rotate: true
+  xy: 462, 136
+  size: 117, 100
+  orig: 117, 100
+  offset: 0, 0
+  index: -1
+Bung
+  rotate: true
+  xy: 181, 92
+  size: 161, 154
+  orig: 161, 154
+  offset: 0, 0
+  index: -1
+Chan_p
+  rotate: true
+  xy: 177, 7
+  size: 66, 73
+  orig: 66, 73
+  offset: 0, 0
+  index: -1
+Chan_t
+  rotate: true
+  xy: 102, 5
+  size: 68, 73
+  orig: 68, 73
+  offset: 0, 0
+  index: -1
+Dui_p
+  rotate: true
+  xy: 252, 2
+  size: 74, 100
+  orig: 74, 100
+  offset: 0, 0
+  index: -1
+Dui_t
+  rotate: true
+  xy: 2, 2
+  size: 71, 98
+  orig: 71, 98
+  offset: 0, 0
+  index: -1
+Duoi
+  rotate: false
+  xy: 641, 201
+  size: 46, 52
+  orig: 46, 52
+  offset: 0, 0
+  index: -1
+Long may_p
+  rotate: false
+  xy: 181, 77
+  size: 33, 13
+  orig: 33, 13
+  offset: 0, 0
+  index: -1
+Long may_t
+  rotate: false
+  xy: 216, 77
+  size: 33, 13
+  orig: 33, 13
+  offset: 0, 0
+  index: -1
+Long mi_p
+  rotate: true
+  xy: 622, 34
+  size: 55, 43
+  orig: 55, 43
+  offset: 0, 0
+  index: -1
+Long trang_t
+  rotate: false
+  xy: 689, 216
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+Longden_t
+  rotate: false
+  xy: 667, 34
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Mat
+  rotate: true
+  xy: 337, 104
+  size: 149, 123
+  orig: 149, 123
+  offset: 0, 0
+  index: -1
+Mieng
+  rotate: false
+  xy: 534, 90
+  size: 58, 44
+  orig: 58, 44
+  offset: 0, 0
+  index: -1
+Mieng 2
+  rotate: false
+  xy: 564, 137
+  size: 61, 32
+  orig: 61, 32
+  offset: 0, 0
+  index: -1
+Mieng 3
+  rotate: false
+  xy: 651, 103
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+Mui 2
+  rotate: false
+  xy: 251, 78
+  size: 20, 12
+  orig: 20, 12
+  offset: 0, 0
+  index: -1
+Tai_p
+  rotate: false
+  xy: 622, 2
+  size: 50, 30
+  orig: 50, 30
+  offset: 0, 0
+  index: -1
+Tai_t
+  rotate: false
+  xy: 627, 138
+  size: 51, 31
+  orig: 51, 31
+  offset: 0, 0
+  index: -1
+Tay_p
+  rotate: false
+  xy: 450, 10
+  size: 93, 73
+  orig: 93, 73
+  offset: 0, 0
+  index: -1
+Tay_p_up
+  rotate: true
+  xy: 545, 6
+  size: 82, 75
+  orig: 82, 75
+  offset: 0, 0
+  index: -1
+Tay_t
+  rotate: false
+  xy: 354, 8
+  size: 94, 74
+  orig: 94, 74
+  offset: 0, 0
+  index: -1
+Tay_t_up
+  rotate: true
+  xy: 564, 171
+  size: 82, 75
+  orig: 82, 75
+  offset: 0, 0
+  index: -1
+Than
+  rotate: false
+  xy: 2, 75
+  size: 177, 178
+  orig: 177, 178
+  offset: 0, 0
+  index: -1
+Toc
+  rotate: false
+  xy: 462, 88
+  size: 70, 46
+  orig: 70, 46
+  offset: 0, 0
+  index: -1
+long den_p
+  rotate: false
+  xy: 667, 68
+  size: 33, 33
+  orig: 33, 33
+  offset: 0, 0
+  index: -1
+long mi_t
+  rotate: false
+  xy: 594, 91
+  size: 55, 44
+  orig: 55, 44
+  offset: 0, 0
+  index: -1
+long trang_p
+  rotate: false
+  xy: 680, 160
+  size: 38, 39
+  orig: 38, 39
+  offset: 0, 0
+  index: -1

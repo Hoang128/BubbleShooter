@@ -1,0 +1,41 @@
+
+CatLose.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 37
+  rotate: false
+  xy: 279, 13
+  size: 205, 221
+  orig: 205, 221
+  offset: 0, 0
+  index: -1
+Layer 38
+  rotate: true
+  xy: 2, 15
+  size: 219, 275
+  orig: 219, 275
+  offset: 0, 0
+  index: -1
+Layer 431
+  rotate: false
+  xy: 795, 2
+  size: 79, 232
+  orig: 79, 232
+  offset: 0, 0
+  index: -1
+Layer 44
+  rotate: false
+  xy: 486, 115
+  size: 307, 119
+  orig: 307, 119
+  offset: 0, 0
+  index: -1
+Layer 481
+  rotate: false
+  xy: 486, 28
+  size: 306, 85
+  orig: 306, 85
+  offset: 0, 0
+  index: -1
